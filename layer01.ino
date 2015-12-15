@@ -1,8 +1,8 @@
- //PUT YOUR GLOBAL VARIABLES HERE
+//PUT YOUR GLOBAL VARIABLES HERE
 volatile bool myFlag1 = false;
 volatile bool myStable1 = false;
           int myCount = 0;
-          int myA0 = 0;   range from 0-4095
+          int myA0 = 0;  // range from 0-4095
           int myFireLimit = 2000;
 
 Timer myTimerD7(7000, myD7Function);   
@@ -50,7 +50,7 @@ void setup(){
 void myNeuralFunction(const char *event, const char *data){   
     
     
-    
+    String myCode = String(data);
     // int pinNumber = myCode.charAt(0);
 
     if (myCode.startsWith("G")){myStable1 = true;}  //set boolean flag to true if Good
@@ -73,7 +73,7 @@ void myNeuralFunction(const char *event, const char *data){
 void loop(){
      
     // your looping stuff goes here
-    myA0 = analogRead(pinNumber);  // read the voltage at A0 as a range form 0-4095
+    myA0 = analogRead(A0);  // read the voltage at A0 as a range form 0-4095
 
     if (myStable1 && myFlag1){
   
