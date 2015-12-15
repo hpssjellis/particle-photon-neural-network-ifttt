@@ -5,10 +5,10 @@ volatile bool myStable1 = false;
           int myA0 = 0;  // range from 0-4095
           int myFireLimit = 2000;
 
-Timer myTimerD7(7000, myD7Function);   
+Timer myTimerD7(30000, myD7Function);   
 // slow down the number of published events sent to IFTTT
-// presently set to one event every 7 seconds
-// after myTimerD7.reset() waits 7 seconds to activate myD7Function
+// presently set to one event every 30 seconds
+// after myTimerD7.reset() waits 30 seconds to activate myD7Function
 
   
 void myD7Function(){
@@ -73,6 +73,8 @@ void myNeuralFunction(const char *event, const char *data){
 void loop(){
      
     // your looping stuff goes here
+    delay(10);     // just to slow things down a bit. remove later
+    
     myA0 = analogRead(A0);  // read the voltage at A0 as a range form 0-4095
 
     if (myStable1 && myFlag1){
@@ -86,13 +88,20 @@ void loop(){
          digitalWrite(D7, LOW);
     }
     
-    if (!myStable1){
+    if (!myStable1){      // If the final result is not stable 
+                          // then randomly change the Outputs
         
          digitalWrite(D7, HIGH);  // just to see if it is working
-                                 // this is going to happen to fast
-                                 
+                                  // this is going to happen to fast
+        delay(100);                         
         int r = random(1, 20);
-        if (r==1){ digitalWrite(D0, HIGH);  }  
+        
+        if (r==1){ 
+             digitalWrite(D0, HIGH); 
+        
+              Particle.publish("Log-this-to-google-drive", String(r), 60, PRIVATE);
+     
+     }  
         if (r==2){ digitalWrite(D0, LOW);  }  
         if (r==3){ digitalWrite(D1, HIGH);  }  
         if (r==4){ digitalWrite(D1, LOW);  }  
@@ -106,8 +115,6 @@ void loop(){
         if (r==12){ digitalWrite(D5, LOW);  }  
         if (r==13){ digitalWrite(D6, HIGH);  }  
         if (r==14){ digitalWrite(D6, LOW);  }  
-        if (r==15){ digitalWrite(D7, HIGH);  }  
-        if (r==16){ digitalWrite(D7, LOW);  }  
 
         
     }
