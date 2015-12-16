@@ -1,7 +1,10 @@
 # particle-photon-neural-network-ifttt
 Just playing around with the Neural Networks and the particle photon with IFTTT and possibly TensorFlow
 
+Dec16, 2015
 
+layer01.ino is working
+started layer02.ino as the new main file. Will try to combine the other node types all in one .ino
 
 
 Dec 15, 2015
