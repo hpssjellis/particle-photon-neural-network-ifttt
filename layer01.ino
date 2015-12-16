@@ -156,8 +156,8 @@ void loop(){
         if (r==12){ fire5 = 1;  }  
         if (r==13){ fire6 = 0;  }  
         if (r==14){ fire6 = 1;  }  
-      //  if (r==15){ fire7 = 0;  }  
-      //  if (r==16){ fire7 = 1;  }  
+        if (r==15){ fire7 = 0;  }  
+        if (r==16){ fire7 = 1;  }  
 
                   
         myTimerStable.reset();   // reset timer to start fresh
