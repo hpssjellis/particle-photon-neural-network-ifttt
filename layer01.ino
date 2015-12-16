@@ -15,9 +15,27 @@ void myD7Function(){
     
     myFlag1 = true; //resets the flag
 
-
 }  
   
+    
+    
+    
+
+Timer myTimerStable(3000, myStableFunction);   
+// slow down the number of published events sent to IFTTT
+// presently set to one event every 3 seconds
+// after myTimerD7.reset() waits 3 seconds to activate myD7Function
+
+  
+void myStableFunction(){
+    
+    myStable1 = true; //resets the flag
+
+}  
+      
+    
+    
+    
     
  // Any general setup stuff goes here   
 void setup(){
@@ -36,6 +54,7 @@ void setup(){
     myTimerD7.start(); 
     // activate the timer to slow information to IFTTT
 
+    myTimerStable.start(); 
      
     Particle.subscribe("x-Fire", myNeuralFunction, MY_DEVICES);  // private
     
@@ -90,33 +109,34 @@ void loop(){
     
     if (!myStable1){      // If the final result is not stable 
                           // then randomly change the Outputs
+     
         
          digitalWrite(D7, HIGH);  // just to see if it is working
                                   // this is going to happen to fast
-        delay(100);                         
+                           
         int r = random(1, 20);
+      
+        Particle.publish("Log-this-to-google-drive", String(r), 60, PRIVATE);     // see the random number
         
-        if (r==1){ 
-             digitalWrite(D0, HIGH); 
         
-              Particle.publish("Log-this-to-google-drive", String(r), 60, PRIVATE);
-     
-     }  
+        if (r==1){ digitalWrite(D0, HIGH); }  
         if (r==2){ digitalWrite(D0, LOW);  }  
-        if (r==3){ digitalWrite(D1, HIGH);  }  
+        if (r==3){ digitalWrite(D1, HIGH); }  
         if (r==4){ digitalWrite(D1, LOW);  }  
-        if (r==5){ digitalWrite(D2, HIGH);  }  
+        if (r==5){ digitalWrite(D2, HIGH); }  
         if (r==6){ digitalWrite(D2, LOW);  }  
-        if (r==7){ digitalWrite(D3, HIGH);  }  
+        if (r==7){ digitalWrite(D3, HIGH); }  
         if (r==8){ digitalWrite(D3, LOW);  }  
-        if (r==9){ digitalWrite(D4, HIGH);  }  
-        if (r==10){ digitalWrite(D4, LOW);  }  
-        if (r==11){ digitalWrite(D5, HIGH);  }  
-        if (r==12){ digitalWrite(D5, LOW);  }  
-        if (r==13){ digitalWrite(D6, HIGH);  }  
-        if (r==14){ digitalWrite(D6, LOW);  }  
+        if (r==9){ digitalWrite(D4, HIGH); }  
+        if (r==10){ digitalWrite(D4, LOW); }  
+        if (r==11){ digitalWrite(D5, HIGH);}  
+        if (r==12){ digitalWrite(D5, LOW); }  
+        if (r==13){ digitalWrite(D6, HIGH);}  
+        if (r==14){ digitalWrite(D6, LOW); }  
 
-        
+                  
+        myTimerStable.reset();   // reset timer to start fresh
+        myStable1 = false;      // reset timer loop variable   
     }
   
 }
