@@ -1,5 +1,6 @@
 //PUT YOUR GLOBAL VARIABLES HERE
 volatile bool myFlag1 = false;
+volatile bool myFlag2 = false;
 volatile bool myStable1 = false;
           int myCount = 0;
           int myA0 = 0;  // range from 0-4095
@@ -10,20 +11,15 @@ Timer myTimerD7(30000, myD7Function);
 // presently set to one event every 30 seconds
 // after myTimerD7.reset() waits 30 seconds to activate myD7Function
 
-
-    
-    
-    
-
-Timer myTimerStable(3000, myStableFunction);   
+Timer myTimerStable(500, myStableFunction);   
 // slow down the number of published events sent to IFTTT
-// presently set to one event every 3 seconds
-// after myTimerD7.reset() waits 3 seconds to activate myD7Function
+// presently set to one event every 0.5 seconds
+// after myTimerD7.reset() waits 0.5 seconds to activate myD7Function
 
   
 void myStableFunction(){
     
-    myStable1 = true; //resets the flag
+    myFlag2 = true; //resets the flag
 
 }  
       
@@ -98,7 +94,7 @@ void loop(){
 
     if (myStable1 && myFlag1){
   
-        Particle.publish("Log-this-to-google-drive", String("Node001 "+myA0), 60, PRIVATE);
+        Particle.publish("Log-this-to-google-drive", String(myA0), 60, PRIVATE);
         // Particle.publish("Log-this-to-google-drive", String("Node001 "+myA0), 60, PUBLIC);
              
         myTimerD7.reset();   // reset timer to start fresh
@@ -109,16 +105,17 @@ void loop(){
          
     }
     
-    else {      // If the final result is not stable 
+        if (!myStable1 && myFlag2){    // If the final result is not stable 
                           // then randomly change the Outputs
-     
         
          digitalWrite(D7, HIGH);
 
                            
         int r = random(1, 20);
       
-        Particle.publish("Log-this-to-google-drive", String(r), 60, PRIVATE);     // see the random number
+        //Particle.publish("Log-this-to-google-drive", String(r), 60, PRIVATE);     
+        // see the random number in google drtive.
+        // change the timer to 4000 from 500 before using this.
         
         
         if (r==1){ digitalWrite(D0, HIGH); }  
@@ -138,7 +135,7 @@ void loop(){
 
                   
         myTimerStable.reset();   // reset timer to start fresh
-        myStable1 = false;      // reset timer loop variable   
+        myFlag2 = false;      // reset timer loop variable   
     }
   
 }
