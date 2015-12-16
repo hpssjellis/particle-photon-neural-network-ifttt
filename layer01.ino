@@ -10,13 +10,7 @@ Timer myTimerD7(30000, myD7Function);
 // presently set to one event every 30 seconds
 // after myTimerD7.reset() waits 30 seconds to activate myD7Function
 
-  
-void myD7Function(){
-    
-    myFlag1 = true; //resets the flag
 
-}  
-  
     
     
     
@@ -34,7 +28,13 @@ void myStableFunction(){
 }  
       
     
+   
+void myD7Function(){
     
+    myFlag1 = true; //resets the flag
+
+}  
+     
     
     
  // Any general setup stuff goes here   
@@ -104,15 +104,17 @@ void loop(){
         myTimerD7.reset();   // reset timer to start fresh
         myFlag1 = false;      // reset timer loop variable
         
+
          digitalWrite(D7, LOW);
+         
     }
     
-    if (!myStable1){      // If the final result is not stable 
+    else {      // If the final result is not stable 
                           // then randomly change the Outputs
      
         
-         digitalWrite(D7, HIGH);  // just to see if it is working
-                                  // this is going to happen to fast
+         digitalWrite(D7, HIGH);
+
                            
         int r = random(1, 20);
       
