@@ -5,7 +5,7 @@ String myType = "EntryNode";    // Very important
                     // can only be one of the following
                     // "EntryNode" max = 1,  sent instruction by "DO" IFTTT 
                     // "EndNode" max = 8,    sent Instructions by "DO" IFTTTT
-                    // "NormalNade" no max   runs automatically
+                    // "NormalNode" no max   runs automatically
 int myUniqueNodeNumber = 0; // This has to be unique for each node "Photon"
                             // entry string is 8 digits for 8 entry's example 10000000
 
