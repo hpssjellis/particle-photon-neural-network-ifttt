@@ -1,6 +1,8 @@
 # particle-photon-neural-network-ifttt
 Just playing around with Neural Networks and the particle photon with IFTTT and possibly TensorFlow
 
+The basic flow of things is to go from serial to digital to analog (summing inputs) back to digital (repeat as needed) then output as serial.
+
 Dec 17, 2015
 
 I have combined everything into the layer02.ino so entryNodes, NormalNodes and EndNodes can all have the same .ino code flashed to the Photon. Each photon will need a unique number set in the variable "myUniqueNodeNumber". Each photon will also have to define the variable "myType" as either EntryNode, NormalNode or EndNode.
