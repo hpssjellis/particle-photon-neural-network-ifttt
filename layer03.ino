@@ -30,9 +30,9 @@ Timer myTimerD7(10000, myD7Function);
 Timer myTimerStable(500, myStableFunction);   
 
  
-Timer myTimer3(61, my3Function);   // prime number frequency
+Timer myTimer3(163, my3Function);   // prime number frequency
 
-
+// 59   157   269   389   509   643   773   919   Hz
  
  
   
@@ -98,13 +98,18 @@ void myNeuralFunction(const char *event, const char *data){
     // Sent by "DO" IFTTT
  
     if (myCode.startsWith("P")){
-           myStable1 = false;   //set boolean flag to true if Good
-           myFlag3 = true; //get the prime number frequency  node on/off routine going
+        myStable1 = false;   //set boolean flag to true if Good
+        myFlag3 = true; //get the prime number frequency  node on/off routine going
+        myTimerStable.stop();   // reset timer to start fresh
+        myTimer3.reset();   // reset timer to start fresh
         }  
     
     
     if (myCode.startsWith("B")){          //set boolean flag to false if Bad  
         myStable1 = false;
+        myFlag3 = false;
+        myTimerStable.reset();   // reset timer to start fresh
+        myTimer3.stop();   // reset timer to start fresh
         Particle.publish("Log-this-to-google-drive", String(myFlag2), 60, PRIVATE);
     }
     // Sent by "DO" IFTTT  
