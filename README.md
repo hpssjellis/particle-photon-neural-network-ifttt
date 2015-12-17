@@ -1,5 +1,5 @@
 # particle-photon-neural-network-ifttt
-Just playing around with the Neural Networks and the particle photon with IFTTT and possibly TensorFlow
+Just playing around with Neural Networks and the particle photon with IFTTT and possibly TensorFlow
 
 Dec 17, 2015
 
