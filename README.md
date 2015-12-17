@@ -8,8 +8,11 @@ Found a really good site to explain Back Propagation at
 
 http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
 
+Which shows an issue with my Photon Neural Network. I am using Digital Output pins which can't be set as having weights. If I had 8 analog outputs I might be able to do backpropagation but I don't. (Analog outputs running PWM might really mess things up. I am waiting for the Particle.io Photon to get DAC outputs working, but it only has two DAC pins A6 and A3)
 
 
+
+Dec 16, 2015
 
 I have combined everything into the layer02.ino so entryNodes, NormalNodes and EndNodes can all have the same .ino code flashed to the Photon. Each photon will need a unique number set in the variable "myUniqueNodeNumber". Each photon will also have to define the variable "myType" as either EntryNode, NormalNode or EndNode.
 
@@ -32,13 +35,13 @@ B-3000  Says the network has not yet found a good fit so randomize the nodes. al
 
 
 
-Dec 16, 2015
+Dec 15, 2015
 
 layer01.ino is working
 started layer02.ino as the new main file. Will try to combine the other node types all in one .ino
 
 
-Dec 15, 2015
+Dec 14, 2015
 
 
 Need at least three photons to test this out but should have 17 photons for full trial, this should be able to be extended to many more photons.
