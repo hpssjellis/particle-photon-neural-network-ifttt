@@ -11,6 +11,10 @@ Entry Nodes will have to be the first ones and are activated by a DO IFTTT recei
 Still have to do the EndNode and figure out backPropagation.
 
 
+
+It looks like each layer will have no maximum number of photons, and no maximum number of layers BUT, each photon will only be able to communicate with 8 other photons. (That is the limit of interceonnected based on using the Photon)
+
+
 Dec16, 2015
 
 layer01.ino is working
