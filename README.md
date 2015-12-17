@@ -15,6 +15,15 @@ Still have to do the EndNode and figure out backPropagation.
 It looks like each layer will have no maximum number of photons, and no maximum number of layers BUT, each photon will only be able to communicate with 8 other photons. (That is the limit of interconnections based on using the Photon)
 
 
+
+
+I also publish using IFTTT DO statements the xFire event (also private but will have to be public eventually). example data sent
+G-654    Says the settings are good and the firelimit is 654
+B-3000  Says the network has not yet found a good fit so randomize the nodes. also sets the fireLimit very high. Maximum = 4095 Analog read channel.
+
+
+
+
 Dec16, 2015
 
 layer01.ino is working
