@@ -3,7 +3,7 @@ Just playing around with Neural Networks and the particle photon with IFTTT and 
 
 Dec 17, 2015
 
-I have combined everything into the layer02.ino so entryNodes NormalNodes and EndNodes can all have the same .ino code flashed to the Photon. Each photon will need a unique number set in the variable "myUniqueNodeNumber". Each photon will also have to define the variable "myType" as either EntryNode, NormalNode or EndNode.
+I have combined everything into the layer02.ino so entryNodes, NormalNodes and EndNodes can all have the same .ino code flashed to the Photon. Each photon will need a unique number set in the variable "myUniqueNodeNumber". Each photon will also have to define the variable "myType" as either EntryNode, NormalNode or EndNode.
 
 
 Entry Nodes will have to be the first ones and are activated by a DO IFTTT receipe that passes a bit signal example for 3 entry nodes turning the first and last on would pass 101 to the published event "my-EntryNode". Presetnly this event is private, but I will have to make it public eventually unless all my Photon's are on the same login.
@@ -12,7 +12,7 @@ Still have to do the EndNode and figure out backPropagation.
 
 
 
-It looks like each layer will have no maximum number of photons, and no maximum number of layers BUT, each photon will only be able to communicate with 8 other photons. (That is the limit of interceonnected based on using the Photon)
+It looks like each layer will have no maximum number of photons, and no maximum number of layers BUT, each photon will only be able to communicate with 8 other photons. (That is the limit of interconnections based on using the Photon)
 
 
 Dec16, 2015
