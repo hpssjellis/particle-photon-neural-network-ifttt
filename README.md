@@ -4,6 +4,17 @@ Just playing around with Neural Networks and the particle photon with IFTTT and 
 The basic flow of things is to go from serial to digital to analog (summing inputs) back to digital (repeat as needed) then output as serial.
 
 Dec 17, 2015
+Afternoon
+
+So..... backpropogation will not work since this Neural Network does not have weights. Each of the 8 connections are digital not analog. This brings up a few points. 
+
+1. Can a software based neural network pre-learn and calculate the connections for this network?
+2. While learning can different nodes oscillates at a fixed frequency for that node to see if any effect is produced on the final nodes. This oscillation frequency could then be used to determince which node is causing the positive change and solidify that node to that positive effect.
+
+
+Dec 17, 2015
+Morning
+
 Found a really good site to explain Back Propagation at 
 
 http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
