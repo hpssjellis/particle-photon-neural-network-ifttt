@@ -1,12 +1,13 @@
 //PUT YOUR GLOBAL VARIABLES HERE
 
 
-String myType = "NormalNode";    // Very important
+String myType = "EntryNode";    // Very important
                     // can only be one of the following
-                    // "StartNode" max = 1,  sent instruction by "DO" IFTTT 
+                    // "EntryNode" max = 1,  sent instruction by "DO" IFTTT 
                     // "EndNode" max = 8,    sent Instructions by "DO" IFTTTT
                     // "NormalNade" no max   runs automatically
-
+int myUniqueNodeNumber = 0; // This has to be unique for each node "Photon"
+                            // entry string is 8 digits for 8 entry's example 10000000
 
 
 
@@ -16,10 +17,13 @@ volatile bool myStable1 = false;
           int myCount = 0;
           int myA0 = 0;  // range from 0-4095
           int myFireLimit = 2000;
-          int fire0, fire1, fire2, fire3, fire4, fire5, fire6, fire7 = 0;
+          bool ifEntryNodeThenFire = false;
+          int fire0, fire1, fire2, fire3, fire4, fire5, fire6, fire7 = 1;
           // 0 = do not fire, 1= fire
+          
+          uint16_t newTimerInterval = 10000;   // unsigned integer for timers
 
-Timer myTimerD7(10000, myD7Function);   
+Timer myTimerD7(newTimerInterval, myD7Function);   
 // slow down the number of published events sent to IFTTT
 // presently set to one event every 30 seconds
 // after myTimerD7.reset() waits 30 seconds to activate myD7Function
@@ -66,10 +70,14 @@ void setup(){
     myTimerStable.start(); 
      
     Particle.subscribe("x-Fire", myNeuralFunction, MY_DEVICES);  // private
+       // Particle.subscribe("x-fire", myNeuralFunction);  // public
+       // expecting x= G for good or B for bad learning
+       // expecting Fire= #### the analog read value that sets a node fire.
     
-    // Particle.subscribe("x-fire", myNeuralFunction);  // public
-    // expecting x= G for good or B for bad learning
-    // expecting Fire= #### the analog read value that sets a node fire.
+    if ( myType == "EntryNode"){   // only load this for starting nodes
+          Particle.subscribe("my-EntryNode", myEntryFunction, MY_DEVICES);  // private will probably have to make public
+    }
+
 
     
 }
@@ -94,15 +102,58 @@ void myNeuralFunction(const char *event, const char *data){
     
     // String  myActivity = myCode.substring(2,6);     // take 4 characters starting at the 3rd.
      
+     
+     
+     
     // Following sets the 2nd and on characters to integers
-    String myOptional = myCode.substring(2);      
+    String myOptional = myCode.substring(2);  
+    
     myFireLimit = myOptional.toInt(); 
     
-    myTimerD7.reset();   // reset timer to start fresh
+    if (myType == "EntryNode" ){
+        myFireLimit = 50000; // unreadchable value for starting nodes 
+    }
+    
+    
+   // newTimerInterval = 1000;
+    
+   // myTimerD7.changePeriod(newTimerInterval); // Reset period of timer to 1000ms. Waiting for version 4.8
+    
+   // myTimerD7.reset();   // reset timer to start fresh
     data = "STOP";
     // change the data so that the function does not fire again
     
 }
+
+
+
+
+
+
+
+void myEntryFunction(const char *event, const char *data){   
+    
+    String myEntryCode = String(data);  
+    myEntryCode.toUpperCase();  
+    String  myActivity = myEntryCode.substring(myUniqueNodeNumber, myUniqueNodeNumber+1); 
+    
+    if (myActivity == "1"){
+        // trun on this node until changed
+       ifEntryNodeThenFire = true;
+    } else {
+        // turn this node off
+       ifEntryNodeThenFire = false; 
+    }
+    
+   myFireLimit = 5000;
+   // set the firelimit above what is possible so that this node is not controlled by any inputs
+    
+    
+}
+
+
+
+
 
 
 void loop(){
@@ -112,7 +163,7 @@ void loop(){
     
     myA0 = analogRead(A0);  // read the voltage at A0 as a range form 0-4095
 
-   if (myA0 >= myFireLimit){
+   if (myA0 >= myFireLimit || ifEntryNodeThenFire){
        
         RGB.brightness(200);    // 1=very low light, 255 = max
         // communicate that this node is firing   
