@@ -8,7 +8,7 @@ I have combined everything into the layer02.ino so entryNodes, NormalNodes and E
 
 Entry Nodes will have to be the first ones and are activated by a DO IFTTT receipe that passes a bit signal example for 3 entry nodes turning the first and last on would pass 101 to the published event "my-EntryNode". Presetnly this event is private, but I will have to make it public eventually unless all my Photon's are on the same login.
 
-Still have to do the EndNode and figure out backPropagation.
+Still have to do the EndNode and figure out backPropogation.
 
 
 
@@ -33,7 +33,7 @@ started layer02.ino as the new main file. Will try to combine the other node typ
 Dec 15, 2015
 
 
-Need at least three photons to teswt this out but should have 17 photons for full trial, this should be able to be extended to many photons.
+Need at least three photons to test this out but should have 17 photons for full trial, this should be able to be extended to many more photons.
 
 
 Entry.ino takes a set of 8 bits from a google doc using IFTTT and sends the information to the main layer of 8 photons
