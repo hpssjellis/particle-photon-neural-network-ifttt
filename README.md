@@ -1,6 +1,13 @@
 # particle-photon-neural-network-ifttt
 Just playing around with the Neural Networks and the particle photon with IFTTT and possibly TensorFlow
 
+Dec 17, 2015
+
+I have combined everything into the layer02.ino so entryNodes NormalNodes and EndNodes can all have the same .ino code flashed to the Photon. Each photon will need a unique number set in the variable "myUniqueNodeNumber" Entry Nodes will have to be the first ones and are activated by a DO IFTTT receipe that passes a bit signal example for 3 entry nodes turning the first and last on would pass 101 to the published event "my-EntryNode". Presetnly this event is private, but I will have to make it public eventually unless all my Photon's are on the same login.
+
+Still have to do the EndNode and figure out backPropagation.
+
+
 Dec16, 2015
 
 layer01.ino is working
