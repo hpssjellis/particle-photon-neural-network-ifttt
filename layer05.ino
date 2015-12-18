@@ -104,6 +104,7 @@ void myNeuralFunction(const char *event, const char *data){
  
     if (myCode.startsWith("P")){
         myStable1 = false;   //set boolean flag to true if Good
+        myFlag2 =false;
         myFlag3 = true; //get the prime number frequency  node on/off routine going
         myTimerStable.stop();   // reset timer to start fresh
         myTimer3.reset();   // reset timer to start fresh
@@ -112,9 +113,11 @@ void myNeuralFunction(const char *event, const char *data){
     
     if (myCode.startsWith("B")){          //set boolean flag to false if Bad  
         myStable1 = false;
+        myFlag1 = false;
+        myFlag2 = false;
         myFlag3 = false;
         myTimerStable.reset();   // reset timer to start fresh
-        myTimer3.stop();   // reset timer to start fresh
+        myTimer3.stop();   // stop timer to start fresh
         Particle.publish("Log-this-to-google-drive", String(myFlag2), 60, PRIVATE);
     }
     // Sent by "DO" IFTTT  
@@ -151,7 +154,11 @@ void myEntryFunction(const char *event, const char *data){
        ifEntryNodeThenFire = false; 
     }
     
-   myFireLimit = 5000;
+    myFireLimit = 5000;
+    myStable1 = true;
+    myFlag3 = false;
+    myTimerStable.reset();   // reset timer to start fresh
+    myTimer3.stop();   // reset timer to start fresh
    // set the firelimit above what is possible so that this node is not controlled by any inputs
     
     
